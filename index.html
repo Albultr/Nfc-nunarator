@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NFC Etiket Yazıcı — Park Numaratörü & Sosyal Medya</title>
+    <title>ALBUL.TR NFC Etiket Yazıcı — Park Numaratörü & Sosyal Medya</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -177,7 +177,7 @@
                     title="Simülasyon ve Gerçek NFC modu arasında geçiş yap"
                     class="px-3 py-2 rounded-xl bg-cockpit-elevated hover:bg-slate-800 border border-cockpit-border text-[11px] font-semibold text-slate-200 flex items-center gap-1.5 transition-colors cursor-pointer shrink-0 select-none"
                 >
-                    <span id="modeToggleLabel">ALBUL.TR: AÇIK</span>
+                    <span id="modeToggleLabel">Simülasyon: AÇIK</span>
                 </button>
             </div>
         </header>
@@ -362,3 +362,14 @@
 
         <!-- Alt Bilgi -->
         <footer class="px-5 py-4 text-center border-t border-cockpit-border/60 bg-cockpit-bg/
+            <script>
+  window.addEventListener('error', function(e) {
+    var box = document.createElement('div');
+    box.style.cssText = 'position:fixed;bottom:10px;left:10px;right:10px;z-index:999999;background:#7f1d1d;color:#fff;padding:12px;border-radius:10px;font-size:12px;font-family:monospace;';
+    box.textContent = 'HATA: ' + e.message + ' (Satir: ' + e.lineno + ')';
+    document.body.appendChild(box);
+  });
+</script>
+</body>
+            </html>
+            
