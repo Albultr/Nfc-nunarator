@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "io.github.albultr.twa",
+        "sha256_cert_fingerprints": ["39:1E:04:AC:45:25:1C:0A:A5:B9:AB:49:6D:21:69:08:BB:4A:1C:18:3F:3C:C7:1F:D1:F6:29:08:C3:61:D2:02"]
+      }
+    }]
