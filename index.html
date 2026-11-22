@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="tr" class="dark">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>NFC Etiket Yazıcı — Park Numaratörü & Sosyal Medya</title>
     <link rel="manifest" href="manifest.json">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -137,66 +136,100 @@
         }
         
 /* ALBUL NFC - MOBİL TASARIM */
+/* ALBUL NFC - RESPONSIVE TASARIM */
+#appShell {
+    width: 100%;
+    max-width: 560px;
+    min-height: 100vh;
+    min-height: 100dvh;
+    margin: 0 auto;
+}
+
 @media screen and (max-width: 600px) {
     html {
-        font-size: 18px !important;
-    }
-
-    header {
-        padding: 18px 16px !important;
-    }
-
-    header h1 {
-        font-size: 21px !important;
-    }
-
-    main {
-        padding: 20px 14px 28px !important;
-        gap: 22px !important;
-    }
-
-    main nav button {
-        min-height: 62px !important;
         font-size: 16px !important;
     }
 
+    header {
+        padding: 14px 14px 12px !important;
+    }
+
+    header h1 {
+        font-size: 18px !important;
+    }
+
+    main {
+        padding: 16px 12px 22px !important;
+        gap: 16px !important;
+    }
+
+    main nav {
+        gap: 4px !important;
+        padding: 5px !important;
+    }
+
+    main nav button {
+        min-height: 50px !important;
+        padding-left: 5px !important;
+        padding-right: 5px !important;
+        font-size: 12px !important;
+        gap: 5px !important;
+        white-space: nowrap;
+    }
+
     #phonePanel,
-    #socialPanel {
-        padding: 22px 18px !important;
-        border-radius: 24px !important;
+    #socialPanel,
+    #googlePanel {
+        padding: 18px 15px !important;
+        border-radius: 20px !important;
     }
 
     #phonePanel label,
-    #socialPanel > div > span {
-        font-size: 14px !important;
+    #socialPanel > div > span,
+    #googlePanel label {
+        font-size: 12px !important;
     }
 
     #phoneInputWrapper,
     #socialInputWrapper {
-        min-height: 68px !important;
+        min-height: 58px !important;
     }
 
     #phoneInput,
     #socialHandleInput {
-        font-size: 21px !important;
-        padding-top: 20px !important;
-        padding-bottom: 20px !important;
+        font-size: 18px !important;
+        padding-top: 16px !important;
+        padding-bottom: 16px !important;
+    }
+
+    #googlePanel textarea,
+    #googlePanel input {
+        font-size: 14px !important;
     }
 
     #writeActionBtn {
-        min-height: 72px !important;
-        font-size: 19px !important;
+        min-height: 60px !important;
+        font-size: 16px !important;
     }
 
     #eraseActionBtn {
-        min-height: 64px !important;
-        font-size: 17px !important;
+        min-height: 54px !important;
+        font-size: 14px !important;
     }
 
     footer {
-        padding: 18px 14px !important;
+        padding: 14px 12px !important;
     }
-}    
+}
+
+@media screen and (min-width: 601px) {
+    #appShell {
+        min-height: 100vh;
+        border-left: 1px solid rgba(255,255,255,.08);
+        border-right: 1px solid rgba(255,255,255,.08);
+        box-shadow: 0 0 48px rgba(0,0,0,.35);
+    }
+}
     </style>
 </head>
 <body class="bg-[#050708] text-white cockpit-grid">
