@@ -135,53 +135,99 @@
             animation: checkPop 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
         }
         
-/* ALBUL NFC - MOBİL TASARIM */
-/* ALBUL NFC - RESPONSIVE TASARIM */
-#appShell {
+
+/* ALBUL NFC - ORTALANMIŞ TELEFON EKRANI */
+
+html,
+body {
     width: 100%;
-    max-width: 560px;
+    min-height: 100%;
+}
+
+body {
     min-height: 100vh;
     min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    box-sizing: border-box;
+    background-color: #05070B;
+}
+
+#appShell {
+    width: 100%;
+    max-width: 410px;
+    height: min(860px, calc(100dvh - 32px));
+    min-height: 0;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 28px;
+    background: #080B10;
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.65),
+        0 0 35px rgba(255,255,255,.035);
+}
+
+#appShell main {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
+#appShell header,
+#appShell footer {
+    flex-shrink: 0;
 }
 
 @media screen and (max-width: 600px) {
-    html {
-        font-size: 16px !important;
+    body {
+        padding: 12px;
     }
 
-    header {
+    #appShell {
+        width: 100%;
+        max-width: 410px;
+        height: calc(100dvh - 24px);
+        border-radius: 25px;
+    }
+
+    #appShell header {
         padding: 14px 14px 12px !important;
     }
 
-    header h1 {
-        font-size: 18px !important;
+    #appShell header h1 {
+        font-size: 17px !important;
     }
 
-    main {
-        padding: 16px 12px 22px !important;
-        gap: 16px !important;
+    #appShell main {
+        padding: 14px 12px 20px !important;
+        gap: 14px !important;
     }
 
-    main nav {
+    #appShell main nav {
         gap: 4px !important;
         padding: 5px !important;
     }
 
-    main nav button {
-        min-height: 50px !important;
-        padding-left: 5px !important;
-        padding-right: 5px !important;
-        font-size: 12px !important;
-        gap: 5px !important;
+    #appShell main nav button {
+        min-height: 48px !important;
+        padding-left: 4px !important;
+        padding-right: 4px !important;
+        font-size: 11px !important;
+        gap: 4px !important;
         white-space: nowrap;
     }
 
     #phonePanel,
     #socialPanel,
     #googlePanel {
-        padding: 18px 15px !important;
-        border-radius: 20px !important;
+        padding: 16px 13px !important;
+        border-radius: 19px !important;
     }
 
     #phonePanel label,
@@ -192,14 +238,14 @@
 
     #phoneInputWrapper,
     #socialInputWrapper {
-        min-height: 58px !important;
+        min-height: 56px !important;
     }
 
     #phoneInput,
     #socialHandleInput {
-        font-size: 18px !important;
-        padding-top: 16px !important;
-        padding-bottom: 16px !important;
+        font-size: 17px !important;
+        padding-top: 14px !important;
+        padding-bottom: 14px !important;
     }
 
     #googlePanel textarea,
@@ -208,28 +254,20 @@
     }
 
     #writeActionBtn {
-        min-height: 60px !important;
-        font-size: 16px !important;
+        min-height: 58px !important;
+        font-size: 15px !important;
     }
 
     #eraseActionBtn {
-        min-height: 54px !important;
+        min-height: 52px !important;
         font-size: 14px !important;
     }
 
-    footer {
-        padding: 14px 12px !important;
+    #appShell footer {
+        padding: 12px !important;
     }
 }
-
-@media screen and (min-width: 601px) {
-    #appShell {
-        min-height: 100vh;
-        border-left: 1px solid rgba(255,255,255,.08);
-        border-right: 1px solid rgba(255,255,255,.08);
-        box-shadow: 0 0 48px rgba(0,0,0,.35);
-    }
-}
+        
     </style>
 </head>
 <body class="bg-[#050708] text-white cockpit-grid">
