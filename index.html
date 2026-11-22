@@ -405,6 +405,28 @@ body {
     border-top: 1px solid rgba(255,255,255,.1) !important;
     }
         
+/* SEKME VE NFC BUTONLARININ SABİT YERLEŞİMİ */
+
+/* Üst sekmeleri biraz aşağı indir */
+#appShell > main > nav {
+    margin-top: 10px !important;
+}
+
+/* NFC butonlarını alt bölgede sabit tut */
+#appShell > main > div.flex.flex-col.gap-3.pt-1 {
+    position: sticky !important;
+    bottom: 0 !important;
+    margin-top: auto !important;
+    padding-top: 18px !important;
+    padding-bottom: 12px !important;
+    background: linear-gradient(
+        180deg,
+        rgba(16, 9, 12, 0),
+        #10090c 18%
+    ) !important;
+    z-index: 5 !important;
+}
+        
     </style>
 </head>
 <body class="bg-[#050708] text-white cockpit-grid">
