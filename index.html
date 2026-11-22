@@ -180,7 +180,15 @@ body {
 #appShell footer {
     flex-shrink: 0;
 }
-
+/* İç tasarımı telefon genişliğinde tut */
+#appShell > header,
+#appShell > main,
+#appShell > footer {
+    width: 100%;
+    max-width: 430px;
+    margin-left: auto;
+    margin-right: auto;
+}
 @media screen and (max-width: 600px) {
     body {
         padding: 0;
