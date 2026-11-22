@@ -268,6 +268,15 @@
                     </svg>
                     <span>Sosyal Medya</span>
                 </button>
+                                <button
+                    id="tabGoogleBtn"
+                    type="button"
+                    role="tab"
+                    aria-selected="false"
+                    class="py-2.5 px-2 rounded-xl text-xs sm:text-sm font-semibold flex items-center justify-center gap-1.5 transition-all cursor-pointer select-none text-white/50 hover:text-white"
+                >
+                    <span>Google Yorum</span>
+                                </button>
             </nav>
 
             <!-- SEKME 1: TELEFON NO -->
@@ -390,6 +399,52 @@
                 </p>
             </section>
 
+            
+            <!-- SEKME 3: GOOGLE YORUM -->
+            <section id="googlePanel" class="bg-cockpit-card border border-cockpit-border rounded-3xl p-4 sm:p-5 shadow-lg hidden flex-col gap-3.5">
+                <div>
+                    <label for="googleLongUrl" class="text-xs font-bold uppercase tracking-wider text-slate-300">
+                        Uzun Google Yorum Bağlantısı
+                    </label>
+                    <textarea
+                        id="googleLongUrl"
+                        rows="3"
+                        placeholder="Google yorum bağlantısını buraya yapıştırın..."
+                        class="mt-2 w-full rounded-2xl bg-cockpit-bg/80 border border-cockpit-border p-3 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-blue-500 resize-none"
+                    ></textarea>
+                </div>
+
+                <button
+                    id="shortenGoogleBtn"
+                    type="button"
+                    class="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm"
+                >
+                    Google Linkini Kısalt
+                </button>
+
+                <p id="googleErrorMsg" class="text-xs text-rose-400 hidden"></p>
+
+                <div>
+                    <label for="googleShortUrl" class="text-xs font-bold uppercase tracking-wider text-slate-300">
+                        NFC'ye Yazılacak Kısa Bağlantı
+                    </label>
+                    <input
+                        id="googleShortUrl"
+                        type="url"
+                        placeholder="Kısa bağlantı burada görünecek..."
+                        class="mt-2 w-full rounded-xl bg-cockpit-bg/80 border border-cockpit-border p-3 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-blue-500"
+                    />
+                </div>
+
+                <button
+                    id="copyGoogleUrlBtn"
+                    type="button"
+                    class="w-full py-2.5 rounded-xl bg-cockpit-elevated border border-cockpit-border text-white text-sm font-semibold"
+                >
+                    Kısa Bağlantıyı Kopyala
+                </button>
+            </section>
+            
             <!-- Ana Aksiyon Butonları ("NFC'ye Yazdır" üstte, "NFC'yi Sil" altta) -->
             <div class="flex flex-col gap-3 pt-1">
                 <button
@@ -667,7 +722,16 @@
             const socialErrorMsg = document.getElementById('socialErrorMsg');
             const socialErrorText = document.getElementById('socialErrorText');
 
+                        // Google Yorum alanları
+            const tabGoogleBtn = document.getElementById('tabGoogleBtn');
+            const googlePanel = document.getElementById('googlePanel');
+            const googleLongUrl = document.getElementById('googleLongUrl');
+            const googleShortUrl = document.getElementById('googleShortUrl');
+            const shortenGoogleBtn = document.getElementById('shortenGoogleBtn');
+            const copyGoogleUrlBtn = document.getElementById('copyGoogleUrlBtn');
+            const googleErrorMsg = document.getElementById('googleErrorMsg');
             const writeActionBtn = document.getElementById('writeActionBtn');
+            
             const eraseActionBtn = document.getElementById('eraseActionBtn');
 
             const nfcScanOverlay = document.getElementById('nfcScanOverlay');
@@ -788,39 +852,48 @@
             });
 
             // Sekme Geçişi ("Telefon No" <-> "Sosyal Medya")
+            
+            // Üç sekme arasında geçiş
             function setActiveTab(tabName) {
                 currentTab = tabName;
+
                 phoneErrorMsg.classList.add('hidden');
                 socialErrorMsg.classList.add('hidden');
+                googleErrorMsg.classList.add('hidden');
+
+                phonePanel.classList.add('hidden');
+                socialPanel.classList.add('hidden');
+                socialPanel.classList.remove('flex');
+                googlePanel.classList.add('hidden');
+                googlePanel.classList.remove('flex');
+
+                const inactiveClass = 'py-2.5 px-2 rounded-xl text-xs sm:text-sm font-semibold flex items-center justify-center gap-1.5 transition-all cursor-pointer select-none text-white/50 hover:text-white';
+                const activeClass = 'py-2.5 px-2 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 transition-all cursor-pointer select-none bg-blue-600 text-white shadow-md shadow-blue-600/25';
+
+                tabPhoneBtn.setAttribute('aria-selected', String(tabName === 'phone'));
+                tabSocialBtn.setAttribute('aria-selected', String(tabName === 'social'));
+                tabGoogleBtn.setAttribute('aria-selected', String(tabName === 'google'));
+
+                tabPhoneBtn.className = tabName === 'phone' ? activeClass : inactiveClass;
+                tabSocialBtn.className = tabName === 'social' ? activeClass : inactiveClass;
+                tabGoogleBtn.className = tabName === 'google' ? activeClass : inactiveClass;
 
                 if (tabName === 'phone') {
-                    tabPhoneBtn.setAttribute('aria-selected', 'true');
-                    tabSocialBtn.setAttribute('aria-selected', 'false');
-
-                    tabPhoneBtn.className = 'py-2.5 px-3 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all cursor-pointer select-none bg-blue-600 text-white shadow-md shadow-blue-600/25';
-                    tabSocialBtn.className = 'py-2.5 px-3 rounded-xl text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 transition-all cursor-pointer select-none text-slate-400 hover:text-white';
-
                     phonePanel.classList.remove('hidden');
-                    socialPanel.classList.add('hidden');
-                    socialPanel.classList.remove('flex');
                     updatePhonePreview();
-                } else {
-                    tabPhoneBtn.setAttribute('aria-selected', 'false');
-                    tabSocialBtn.setAttribute('aria-selected', 'true');
-
-                    tabSocialBtn.className = 'py-2.5 px-3 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all cursor-pointer select-none bg-blue-600 text-white shadow-md shadow-blue-600/25';
-                    tabPhoneBtn.className = 'py-2.5 px-3 rounded-xl text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 transition-all cursor-pointer select-none text-slate-400 hover:text-white';
-
-                    phonePanel.classList.add('hidden');
+                } else if (tabName === 'social') {
                     socialPanel.classList.remove('hidden');
                     socialPanel.classList.add('flex');
                     updateSocialPreview();
+                } else if (tabName === 'google') {
+                    googlePanel.classList.remove('hidden');
+                    googlePanel.classList.add('flex');
                 }
             }
-
+            
             tabPhoneBtn.addEventListener('click', () => setActiveTab('phone'));
             tabSocialBtn.addEventListener('click', () => setActiveTab('social'));
-
+            tabGoogleBtn.addEventListener('click', () => setActiveTab('google'));
             // Telefon Numarası Temizleme & Formatlama (5XX XXX XX XX -> 10 hane)
             function extractTurkishMobileDigits(rawInput) {
                 let digits = String(rawInput || '').replace(/\D/g, '');
@@ -991,6 +1064,76 @@
                 socialErrorMsg.classList.add('hidden');
                 return `${cfg.baseUrl}${cleanHandle}`;
             }
+                    // Google yorum bağlantısı doğrulama
+            function validateAndBuildGooglePayload() {
+                const url = googleShortUrl.value.trim();
+
+                if (!/^https?:\/\/\S+/i.test(url)) {
+                    googleErrorMsg.textContent = 'Lütfen geçerli bir kısa Google yorum bağlantısı girin.';
+                    googleErrorMsg.classList.remove('hidden');
+                    googleShortUrl.focus();
+                    return null;
+                }
+
+                googleErrorMsg.classList.add('hidden');
+                return url;
+            }
+
+            // Google yorum bağlantısını kısalt
+            shortenGoogleBtn.addEventListener('click', async () => {
+                const longUrl = googleLongUrl.value.trim();
+
+                if (!/^https?:\/\/\S+/i.test(longUrl)) {
+                    googleErrorMsg.textContent = 'Önce geçerli bir Google yorum bağlantısı yapıştırın.';
+                    googleErrorMsg.classList.remove('hidden');
+                    googleLongUrl.focus();
+                    return;
+                }
+
+                shortenGoogleBtn.disabled = true;
+                shortenGoogleBtn.textContent = 'Kısaltılıyor...';
+
+                try {
+                    const response = await fetch(
+                        'https://is.gd/create.php?format=simple&url=' + encodeURIComponent(longUrl)
+                    );
+
+                    const result = (await response.text()).trim();
+
+                    if (!response.ok || !/^https?:\/\/is\.gd\//i.test(result)) {
+                        throw new Error('Kısaltma başarısız');
+                    }
+
+                    googleShortUrl.value = result;
+                    googleErrorMsg.classList.add('hidden');
+
+                } catch (error) {
+                    googleErrorMsg.textContent = 'Otomatik kısaltma başarısız. Kısa bağlantıyı elle yapıştırabilirsiniz.';
+                    googleErrorMsg.classList.remove('hidden');
+
+                } finally {
+                    shortenGoogleBtn.disabled = false;
+                    shortenGoogleBtn.textContent = 'Google Linkini Kısalt';
+                }
+            });
+                    // Google kısa bağlantısını kopyala
+            copyGoogleUrlBtn.addEventListener('click', async () => {
+                const url = googleShortUrl.value.trim();
+
+                if (!url) {
+                    googleErrorMsg.textContent = 'Önce kısa bağlantı oluşturun veya yapıştırın.';
+                    googleErrorMsg.classList.remove('hidden');
+                    return;
+                }
+
+                try {
+                    await navigator.clipboard.writeText(url);
+                    showToast('Kısa bağlantı kopyalandı.', 'success');
+                } catch (e) {
+                    googleErrorMsg.textContent = 'Kopyalama başarısız. Bağlantıyı elle seçip kopyalayın.';
+                    googleErrorMsg.classList.remove('hidden');
+                }
+            });
 
             // NFC Algılama Ekranı Görünüm Aşamaları
             function applyScanStageVisual(stage, actionType) {
@@ -1236,8 +1379,11 @@
             // "NFC'ye Yazdır" Butonu
             writeActionBtn.addEventListener('click', () => {
                 const payloadUri = currentTab === 'phone'
+                                    const payloadUri = currentTab === 'phone'
                     ? validateAndBuildPhonePayload()
-                    : validateAndBuildSocialPayload();
+                    : currentTab === 'social'
+                        ? validateAndBuildSocialPayload()
+                        : validateAndBuildGooglePayload();
 
                 if (!payloadUri) {
                     showToast('Lütfen önce geçerli bir bilgi girin.', 'error');
@@ -1291,7 +1437,11 @@
                 }
                 const actionToRetry = pendingAction;
                 const payloadToRetry = actionToRetry === 'write'
-                    ? (currentTab === 'phone' ? validateAndBuildPhonePayload() : validateAndBuildSocialPayload())
+                                        ? (currentTab === 'phone'
+                        ? validateAndBuildPhonePayload()
+                        : currentTab === 'social'
+                            ? validateAndBuildSocialPayload()
+                            : validateAndBuildGooglePayload())
                     : '';
 
                 if (actionToRetry === 'write' && !payloadToRetry) {
