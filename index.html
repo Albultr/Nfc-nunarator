@@ -273,6 +273,138 @@ body {
     }
 }
         
+/* =====================================
+   ALBUL NFC - YENİ PROFESYONEL TASARIM
+   ===================================== */
+
+/* Mod göstergesi ve değiştirme butonunu gizle */
+#modeIndicatorDot,
+#modeIndicatorText,
+#toggleSimModeBtn {
+    display: none !important;
+}
+
+/* Genel arka plan */
+body {
+    background:
+        radial-gradient(ellipse at top, #490914 0%, #18070b 48%, #080609 100%) !important;
+}
+
+/* Uygulama ana gövdesi */
+#appShell {
+    background: linear-gradient(180deg, #25080e 0%, #10090c 100%) !important;
+    color: #fff;
+}
+
+/* Üst başlık */
+#appShell > header {
+    background: linear-gradient(135deg, #650d1b, #350811) !important;
+    border-bottom: 1px solid rgba(255,255,255,.12) !important;
+    padding-top: 20px !important;
+    padding-bottom: 18px !important;
+}
+
+/* Logo */
+#appShell header img {
+    border: 1px solid rgba(255,255,255,.35) !important;
+    border-radius: 15px !important;
+}
+
+/* Uygulama adı */
+#appShell header h1 {
+    color: #fff !important;
+    letter-spacing: -.4px !important;
+}
+
+/* Sekme alanı */
+#appShell main nav {
+    background: #310b13 !important;
+    border: 1px solid rgba(255,255,255,.13) !important;
+    border-radius: 17px !important;
+    padding: 5px !important;
+    gap: 5px !important;
+}
+
+/* Bütün sekmeler */
+#appShell main nav button {
+    border-radius: 12px !important;
+    border: 1px solid transparent !important;
+    background: transparent !important;
+    color: rgba(255,255,255,.68) !important;
+    box-shadow: none !important;
+    transition: all .2s ease !important;
+}
+
+/* Aktif sekme */
+#appShell main nav button[aria-selected="true"] {
+    background: linear-gradient(135deg, #e12b48, #a90e29) !important;
+    color: #fff !important;
+    border-color: rgba(255,255,255,.18) !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,.25) !important;
+}
+
+/* Telefon, sosyal medya ve Google kartları */
+#phonePanel,
+#socialPanel,
+#googlePanel {
+    background: linear-gradient(145deg, #3b101a, #260a12) !important;
+    border: 1px solid rgba(255,255,255,.14) !important;
+    border-radius: 22px !important;
+    box-shadow: 0 10px 28px rgba(0,0,0,.22) !important;
+}
+
+/* Giriş alanları */
+#appShell input,
+#appShell textarea,
+#phoneInputWrapper,
+#socialInputWrapper {
+    background-color: #19090e !important;
+    border-color: rgba(255,255,255,.17) !important;
+    color: #fff !important;
+    border-radius: 12px !important;
+}
+
+/* Giriş alanına dokunulduğunda */
+#appShell input:focus,
+#appShell textarea:focus {
+    border-color: #e34a60 !important;
+    outline: none !important;
+}
+
+/* Platform ve yardımcı butonlar */
+.platform-btn,
+#shortenGoogleBtn,
+#copyGoogleUrlBtn,
+#clearPhoneBtn,
+#clearSocialBtn {
+    border-radius: 12px !important;
+    border-color: rgba(255,255,255,.18) !important;
+    transition: all .2s ease !important;
+}
+
+/* Ana NFC yazdırma butonu */
+#writeActionBtn {
+    background: linear-gradient(135deg, #ed3854, #b50e2d) !important;
+    border: 1px solid rgba(255,255,255,.2) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 7px 20px rgba(180,14,45,.25) !important;
+    color: #fff !important;
+}
+
+/* NFC silme butonu */
+#eraseActionBtn {
+    background: #291018 !important;
+    border: 1px solid rgba(255,255,255,.16) !important;
+    border-radius: 16px !important;
+    color: #f2dce1 !important;
+}
+
+/* Alt bilgi */
+#appShell > footer {
+    background: #18090e !important;
+    border-top: 1px solid rgba(255,255,255,.1) !important;
+    }
+        
     </style>
 </head>
 <body class="bg-[#050708] text-white cockpit-grid">
