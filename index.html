@@ -1316,43 +1316,46 @@ body {
                 return url;
             }
 
-            // Google yorum bağlantısını kısalt
-            shortenGoogleBtn.addEventListener('click', async () => {
-                const longUrl = googleLongUrl.value.trim();
+            
+// Google yorum bağlantısını kısalt
+shortenGoogleBtn.addEventListener('click', async () => {
+    const longUrl = googleLongUrl.value.trim();
 
-                if (!/^https?:\/\/\S+/i.test(longUrl)) {
-                    googleErrorMsg.textContent = 'Önce geçerli bir Google yorum bağlantısı yapıştırın.';
-                    googleErrorMsg.classList.remove('hidden');
-                    googleLongUrl.focus();
-                    return;
-                }
+    if (!/^https?:\/\/\S+/i.test(longUrl)) {
+        googleErrorMsg.textContent = 'Önce geçerli bir Google yorum bağlantısı yapıştırın.';
+        googleErrorMsg.classList.remove('hidden');
+        googleLongUrl.focus();
+        return;
+    }
 
-                shortenGoogleBtn.disabled = true;
-                shortenGoogleBtn.textContent = 'Kısaltılıyor...';
+    shortenGoogleBtn.disabled = true;
+    shortenGoogleBtn.textContent = 'Kısaltılıyor...';
 
-                try {
-                    const response = await fetch(
-                        'https://is.gd/create.php?format=simple&url=' + encodeURIComponent(longUrl)
-                    );
+    try {
+        const response = await fetch(
+            'https://da.gd/s?url=' + encodeURIComponent(longUrl)
+        );
 
-                    const result = (await response.text()).trim();
+        const result = (await response.text()).trim();
 
-                    if (!response.ok || !/^https?:\/\/is\.gd\//i.test(result)) {
-                        throw new Error('Kısaltma başarısız');
-                    }
+        if (!response.ok || !/^https?:\/\/da\.gd\//i.test(result)) {
+            throw new Error('Kısaltma başarısız: ' + result);
+        }
 
-                    googleShortUrl.value = result;
-                    googleErrorMsg.classList.add('hidden');
+        googleShortUrl.value = result;
+        googleErrorMsg.classList.add('hidden');
+        showToast('Google bağlantısı kısaltıldı.', 'success');
 
-                } catch (error) {
-                    googleErrorMsg.textContent = 'Otomatik kısaltma başarısız. Kısa bağlantıyı elle yapıştırabilirsiniz.';
-                    googleErrorMsg.classList.remove('hidden');
+    } catch (error) {
+        googleErrorMsg.textContent = 'Bağlantı kısaltılamadı. İnternet bağlantısını kontrol edip tekrar deneyin.';
+        googleErrorMsg.classList.remove('hidden');
 
-                } finally {
-                    shortenGoogleBtn.disabled = false;
-                    shortenGoogleBtn.textContent = 'Google Linkini Kısalt';
-                }
-            });
+    } finally {
+        shortenGoogleBtn.disabled = false;
+        shortenGoogleBtn.textContent = 'Google Linkini Kısalt';
+    }
+});
+        
                     // Google kısa bağlantısını kopyala
             copyGoogleUrlBtn.addEventListener('click', async () => {
                 const url = googleShortUrl.value.trim();
