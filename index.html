@@ -407,24 +407,31 @@ body {
         
 /* SEKME VE NFC BUTONLARININ SABİT YERLEŞİMİ */
 
-/* Üst sekmeleri biraz aşağı indir */
 #appShell > main > nav {
     margin-top: 10px !important;
 }
 
-/* NFC butonlarını alt bölgede sabit tut */
+/* NFC butonlarını ekranın altına sabitle */
 #appShell > main > div.flex.flex-col.gap-3.pt-1 {
-    position: sticky !important;
-    bottom: 0 !important;
-    margin-top: auto !important;
-    padding-top: 18px !important;
-    padding-bottom: 12px !important;
+    position: fixed !important;
+    bottom: 68px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: calc(100% - 24px) !important;
+    max-width: 406px !important;
+    margin: 0 !important;
+    padding: 14px 0 10px !important;
     background: linear-gradient(
         180deg,
         rgba(16, 9, 12, 0),
-        #10090c 18%
+        #10090c 20%
     ) !important;
-    z-index: 5 !important;
+    z-index: 40 !important;
+}
+
+/* İçerik sabit butonların altında kaybolmasın */
+#appShell > main {
+    padding-bottom: 170px !important;
 }
         
     </style>
